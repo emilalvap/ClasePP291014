@@ -26,7 +26,7 @@ int main ()
 	  step = 1.0/(double) num_steps;
 	  start_time = omp_get_wtime();
 
-          #pragma omp parallel for reduction(+:sum) private(x) 
+#pragma omp parallel for reduction(+:sum) private(x) schedule(guided)
 	  for (i=1;i<= num_steps; i++){
 		  x = (i-0.5)*step;
 		  sum = sum + 4.0/(1.0+x*x);
@@ -37,6 +37,7 @@ int main ()
 	  printf("\n pi with %ld steps is %f in %f seconds\n ",num_steps,pi,run_time);
 }	  
 
-
+// compilation using gcc and openMp libraries
+// gcc -fopenmp -o x.c x
 
 
